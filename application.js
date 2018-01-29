@@ -113,5 +113,9 @@ $(document).ready(function() {
         $('#players-input').prop("disabled",false);
 
     })
+
+    $( "li" ).mouseover(function() {
+      $( "#log" ).append( "<div>Handler for .mouseover() called.</div>" );
+    });
 })
 
