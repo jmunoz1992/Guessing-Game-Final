@@ -46,7 +46,7 @@ Game.prototype.checkGuess = function() {
                 $('#hint, #submit').prop("disabled",true);
                 $('#subtitle').text("RESET THE GAME to play again!");
                 $('#players-input').prop("disabled",true);
-                return 'You Lose. The winning number was ' + this.winningNumber '.';
+                return 'You Lose. The winning number was ' + this.winningNumber + '.';
             }
             else {
                 var diff = this.difference();
