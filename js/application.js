@@ -33,7 +33,7 @@ Game.prototype.checkGuess = function() {
     if(this.playersGuess===this.winningNumber) {
         $('#hint, #submit').prop("disabled",true);
         $('#subtitle').text("RESET THE GAME to play again!")
-        return 'You Win!'
+        return 'You Win! The winning number was ' + this.winningNumber + '.';
     }
     else {
         if(this.pastGuesses.indexOf(this.playersGuess) > -1) {
