@@ -123,7 +123,7 @@ $(document).ready(function() {
     $('#reset').click(function() {
         game = newGame();
         $('#title').text('THE GUESSING GAME');
-        $('#subtitle').text('Guess a number between 1-100!')
+        $('#subtitle').text('Guess a number between 1-100')
         var text = "<a href='#' class='show-option' title='Guess will appear here'><i class='icon-edit icon-white'>-</i></a>";
         $(".guess").html(text);
         $('#hint, #submit').prop("disabled",false);
