@@ -69,14 +69,22 @@ Game.prototype.provideHint = function() {
     return shuffle(hintArray);
 }
 
-function shuffle(arr) { 
-   for(var i = arr.length-1; i > 0; i--) {
-       var randomIndex = Math.floor(Math.random() * (i + 1));
-       var temp = arr[i];
-       arr[i] = arr[randomIndex];
-       arr[randomIndex] = temp;
-    }
-    return arr;
+function shuffle(array) { 
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
 }
 
 function makeAGuess(game) {
