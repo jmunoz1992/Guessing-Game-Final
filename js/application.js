@@ -8,7 +8,6 @@ function generateWinningNumber() {
     return Math.ceil(Math.random()*100);
 }
 
-
 function newGame() {
     return new Game();
 }
@@ -65,7 +64,16 @@ Game.prototype.checkGuess = function() {
 }
 
 Game.prototype.provideHint = function() {
-    var hintArray = [this.winningNumber, generateWinningNumber(), generateWinningNumber()];
+    var random1 = 1;
+    var random2 = 2;
+    if(this.playersGuess > this.winningNumber) {
+        random1 = Math.ceil(Math.random() * (Math.abs(this.playersGuess - 1)) + 1);
+        random2 = Math.ceil(Math.random() * (Math.abs(this.playersGuess - 1)) + 1);
+    } else {
+        random1 = Math.ceil(Math.random() * (Math.abs(100-this.playersGuess)) + this.playersGuess);
+        random2 = Math.ceil(Math.random() * (Math.abs(100-this.playersGuess)) + this.playersGuess);
+    }
+    var hintArray = [this.winningNumber, random1, random2];
     return shuffle(hintArray);
 }
 
@@ -109,7 +117,7 @@ $(document).ready(function() {
 
     $('#hint').click(function() {
         var hints = game.provideHint();
-        $('#title').text('The winning number is '+hints[0]+', '+hints[1]+', or '+hints[2]);
+        $('#title').text('The winning number is either '+hints[0]+', '+hints[1]+', or '+hints[2] + '.');
     });
 
     $('#reset').click(function() {
