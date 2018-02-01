@@ -64,20 +64,30 @@ Game.prototype.checkGuess = function() {
 }
 
 Game.prototype.provideHint = function() {
-    var random1 = 1;
-    var random2 = 2;
-    if(this.playersGuess > this.winningNumber) {
-        random1 = Math.ceil(Math.random() * (Math.abs(this.playersGuess - 1)) + 1);
-        random2 = Math.ceil(Math.random() * (Math.abs(this.playersGuess - 1)) + 1);
-    } else {
-        random1 = Math.ceil(Math.random() * (Math.abs(100-this.playersGuess)) + this.playersGuess);
-        random2 = Math.ceil(Math.random() * (Math.abs(100-this.playersGuess)) + this.playersGuess);
+    var random1 = this.winningNumber;
+    var random2 = this.winningNumber;
+
+    let cycle = 0;
+    while(random1 === random2 || random1 === this.playersGuess || random2 === this.playersGuess) {
+        cycle++;
+        if(this.playersGuess > this.winningNumber) {
+            random1 = Math.ceil(Math.random() * (Math.abs(this.playersGuess - 1)) + 1);
+            random2 = Math.ceil(Math.random() * (Math.abs(this.playersGuess - 1)) + 1);
+        } else {
+            random1 = Math.ceil(Math.random() * (Math.abs(100-this.playersGuess)) + this.playersGuess);
+            random2 = Math.ceil(Math.random() * (Math.abs(100-this.playersGuess)) + this.playersGuess);
+        }
+        if(cycle > 20000) {
+            break;
+        }
     }
+
+
     var hintArray = [this.winningNumber, random1, random2];
     return shuffle(hintArray);
 }
 
-function shuffle(array) { 
+function shuffle(array) {
   var m = array.length, t, i;
 
   // While there remain elements to shuffle…
@@ -110,7 +120,7 @@ $(document).ready(function() {
     })
 
     $('#players-input').keypress(function(event) {
-        if ( event.which == 13 ) {
+        if (event.which == 13) {
            makeAGuess(game);
         }
     })
@@ -132,13 +142,14 @@ $(document).ready(function() {
     });
 
     $(function() {
-    $( ".show-option" ).tooltip({
-        show: {
-        effect: "slideDown",
-        delay: 300
-        }
+        $( ".show-option" ).tooltip({
+            show: {
+            effect: "slideDown",
+            delay: 300
+            }
+        });
     });
-});
-
 })
+
+
 
